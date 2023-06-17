@@ -1,0 +1,44 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "serverless-swagger-ui"
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/api-docs": {
+      "get": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:eu-central-1:lambda:path/2015-03-31/functions/{SWAGGER_UI_HANDLER_ARN}/invocations",
+          "httpMethod": "POST",
+          "passthroughBehavior": "when_no_match",
+          "timeoutInMillis": 29000,
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/api-docs/{proxy+}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "proxy",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:eu-central-1:lambda:path/2015-03-31/functions/{SWAGGER_UI_HANDLER_ARN}/invocations",
+          "httpMethod": "POST",
+          "passthroughBehavior": "when_no_match",
+          "timeoutInMillis": 29000,
+          "type": "aws_proxy"
+        }
+      }
+    }
+  }
+}
