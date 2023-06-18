@@ -32,10 +32,10 @@ export class ApiGatewayStack extends Stack {
     // contracts
     const api = new RestApi(this, "ContractsApi");
 
-    const spacesResource = api.root.addResource("contracts");
-    spacesResource.addMethod("GET", props.contractsLambdaIntegration);
-    spacesResource.addMethod("POST", props.contractsLambdaIntegration);
-    spacesResource.addMethod("PUT", props.contractsLambdaIntegration);
-    spacesResource.addMethod("DELETE", props.contractsLambdaIntegration);
+    const contractsResource = api.root.addResource("contracts");
+    contractsResource.addMethod("GET", props.contractsLambdaIntegration);
+    contractsResource.addMethod("POST", props.contractsLambdaIntegration);
+    contractsResource.addMethod("PUT", props.contractsLambdaIntegration);
+    contractsResource.addMethod("DELETE", props.contractsLambdaIntegration);
   }
 }

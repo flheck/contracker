@@ -61,6 +61,7 @@ export class LambdaStack extends Stack {
       code: Code.fromAsset(join(__dirname, "..", "services")),
       runtime: Runtime.PYTHON_3_10,
       handler: "contracts.index.lambda_handler",
+      // Other way to add table name environment: https://stackoverflow.com/questions/74987459/get-the-name-of-a-dynamo-table-created-with-aws-cdk
       environment: {
         TABLE_NAME: props.contractsTable.tableName,
       },

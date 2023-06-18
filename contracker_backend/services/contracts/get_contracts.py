@@ -1,34 +1,44 @@
 import json
-import boto3
-
-# Get the service resource
-dynamodb = boto3.client("dynamodb")
+import os
 
 
-def scan_table(dynamo_client, *, TableName, **kwargs):
-    """
-    Generates all the items in a DynamoDB table.
-
-    :param dynamo_client: A boto3 client for DynamoDB.
-    :param TableName: The name of the table to scan.
-
-    Other keyword arguments will be passed directly to the Scan operation.
-    See https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html#DynamoDB.Client.scan
-
-    """
-    paginator = dynamo_client.get_paginator("scan")
-
-    for page in paginator.paginate(TableName=TableName, **kwargs):
-        yield from page["Items"]
-
-
-def get_contracts(event, context):
-    retItems = []
-
-    for item in scan_table(dynamodb, TableName="my-table-name"):
-        retItems.append(item)
-    return (
-        json.dumps({"success": True, "items": item}),
-        200,
-        {"ContentType": "application/json"},
+def get_contracts(event, table) -> dict:
+    queryStringParameters = (
+        event["queryStringParameters"] if event["queryStringParameters"] else False
     )
+
+    if queryStringParameters:
+        if "id" in queryStringParameters:
+            contract_id = queryStringParameters["id"]
+            response_get_item = table.get_item(Key={"id": contract_id})
+
+            print(response_get_item)
+            if response_get_item["Item"]:
+                return {
+                    "statusCode": 200,
+                    "headers": {"Content-Type": "application/json"},
+                    "body": json.dumps(response_get_item["Item"]),
+                }
+            else:
+                return {
+                    "statusCode": 404,
+                    "headers": {"Content-Type": "application/json"},
+                    "body": json.dumps(
+                        {"message": f"Contract with {contract_id} not found!"}
+                    ),
+                }
+
+        else:
+            return {
+                "statusCode": 400,
+                "headers": {"Content-Type": "application/json"},
+                "body": json.dumps({"message": "Id required!"}),
+            }
+
+    result = table.scan()
+
+    return {
+        "statusCode": 200,
+        "headers": {"Content-Type": "application/json"},
+        "body": json.dumps(result["Items"]),
+    }
