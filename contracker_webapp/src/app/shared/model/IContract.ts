@@ -7,3 +7,7 @@ export interface IContract {
   cost: number;
   currency: string;
 }
+
+export interface IResponseMessage {
+  message: string;
+}

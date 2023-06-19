@@ -1,7 +1,9 @@
 import { Stack, StackProps } from "aws-cdk-lib";
 import {
   ApiDefinition,
+  Cors,
   LambdaIntegration,
+  ResourceOptions,
   RestApi,
   SpecRestApi,
 } from "aws-cdk-lib/aws-apigateway";
@@ -32,7 +34,18 @@ export class ApiGatewayStack extends Stack {
     // contracts
     const api = new RestApi(this, "ContractsApi");
 
-    const contractsResource = api.root.addResource("contracts");
+    const optionsWithCors: ResourceOptions = {
+      defaultCorsPreflightOptions: {
+        allowOrigins: Cors.ALL_ORIGINS,
+        allowMethods: Cors.ALL_METHODS,
+      },
+    };
+
+    const contractsResource = api.root.addResource(
+      "contracts",
+      optionsWithCors
+    );
+
     contractsResource.addMethod("GET", props.contractsLambdaIntegration);
     contractsResource.addMethod("POST", props.contractsLambdaIntegration);
     contractsResource.addMethod("PUT", props.contractsLambdaIntegration);

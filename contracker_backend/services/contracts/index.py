@@ -1,6 +1,4 @@
 import boto3
-import json
-import os
 
 # Custom Modules
 from . import get_contracts
@@ -23,7 +21,7 @@ dyn_resource = boto3.resource("dynamodb")
 
 def lambda_handler(event, context):
     response = None
-    table = dyn_resource.Table(os.environ["TABLE_NAME"])
+    table = dyn_resource.Table(utils.get_environments("TABLE_NAME"))
 
     try:
         match event["httpMethod"]:
@@ -40,8 +38,9 @@ def lambda_handler(event, context):
 
     except Exception as error:
         print(error)
-        return {"statusCode": 500, "body": json.dumps({"message": error})}
+        return utils.create_return_obj(
+            500, {"Content-Type": "application/json"}, {"message": error}
+        )
 
     utils.add_cors_header(response)
-    print(response)
     return response

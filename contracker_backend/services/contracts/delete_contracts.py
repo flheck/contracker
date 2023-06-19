@@ -1,4 +1,4 @@
-import json
+from . import utils
 
 
 def delete_contracts(event, table) -> dict:
@@ -10,14 +10,15 @@ def delete_contracts(event, table) -> dict:
         contractId = queryStringParameters["id"]
 
         table.delete_item(Key={"id": contractId})
-        return {
-            "statusCode": 200,
-            "headers": {"Content-Type": "application/json"},
-            "body": json.dumps({"message": f"Deleted contract with id {contractId}"}),
-        }
 
-    return {
-        "statusCode": 400,
-        "headers": {"Content-Type": "application/json"},
-        "body": json.dumps({"message": "Argument not found, provide corret Argument"}),
-    }
+        return utils.create_return_obj(
+            200,
+            {"Content-Type": "application/json"},
+            {"message": f"Deleted contract with id {contractId}"},
+        )
+
+    return utils.create_return_obj(
+        400,
+        {"Content-Type": "application/json"},
+        {"message": "Argument not found, provide corret Argument"},
+    )

@@ -2,10 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
-import { IContract } from 'src/app/shared/model/IContract';
+import { IContract, IResponseMessage } from 'src/app/shared/model/IContract';
 
 // Services
 import { ContractService } from 'src/app/services/contract/contract.service';
+import { MessageService } from 'src/app/services/message/message.service';
 
 @Component({
   selector: 'app-table',
@@ -27,7 +28,10 @@ export class TableComponent {
   ];
   public dataSource!: MatTableDataSource<IContract>;
 
-  constructor(private contractService: ContractService) {}
+  constructor(
+    private contractService: ContractService,
+    private messageService: MessageService
+  ) {}
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -37,7 +41,12 @@ export class TableComponent {
   }
 
   deleteItem(id: string) {
-    console.log(id);
+    this.contractService
+      .deleteContract(id)
+      .subscribe((response: IResponseMessage) => {
+        this.messageService.sendMessage(response.message);
+        this.getContracts();
+      });
   }
 
   editItem(id: string) {

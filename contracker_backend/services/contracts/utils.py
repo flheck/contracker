@@ -1,5 +1,6 @@
 import uuid
 import json
+import os
 from datetime import datetime
 
 
@@ -26,3 +27,6 @@ def add_cors_header(arg):
 def transformUnixTimestampToDate(timestamp: str) -> str:
     ts = int(int(timestamp) / 1000)
     return datetime.utcfromtimestamp(ts).strftime("%d.%m.%Y")
+
+def get_environments(env_name: str):
+    return os.environ[env_name]

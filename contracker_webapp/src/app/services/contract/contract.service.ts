@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IContract } from 'src/app/shared/model/IContract';
 import { Observable } from 'rxjs';
 import { MessageService } from '../message/message.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +20,11 @@ export class ContractService {
     const contracts = this.http.get<IContract[]>(this.contractUrl);
     this.messageService.sendMessage('Contracts Loaded');
     return contracts;
+  }
+
+  deleteContract(id: string): Observable<any> {
+    const options = { params: new HttpParams().set('id', id) };
+    const response = this.http.delete(this.contractUrl, options);
+    return response;
   }
 }
