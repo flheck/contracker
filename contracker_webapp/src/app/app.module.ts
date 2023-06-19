@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 // Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -22,7 +23,8 @@ import { MainComponent } from './pages/main/main.component';
 import { ContractOverviewComponent } from './pages/contract-overview/contract-overview.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { TableComponent } from './components/table/table.component';
+import { TableComponent } from './pages/contract-overview/table/table.component';
+import { MessagesComponent } from './components/messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -33,11 +35,13 @@ import { TableComponent } from './components/table/table.component';
     NotFoundComponent,
     FooterComponent,
     TableComponent,
+    MessagesComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
     //Material
     MatToolbarModule,
     MatIconModule,

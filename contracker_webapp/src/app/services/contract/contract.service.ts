@@ -1,18 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { Injectable } from '@angular/core';
+import { IContract } from 'src/app/shared/model/IContract';
+import { Observable, of } from 'rxjs';
 
-export interface ContractElement {
-  id: string;
-  company_name: string;
-  contract_name: string;
-  start_date: string;
-  cancellation_period: string;
-  cost: number;
-  currency: string;
-}
-
-const CONTRACT_DATA: ContractElement[] = [
+const CONTRACT_DATA: IContract[] = [
   {
     id: '03e9c596-daf5-44ec-86fb-206a28ee39f5',
     company_name: 'Strosin, Reinger and Lindgren',
@@ -195,41 +185,13 @@ const CONTRACT_DATA: ContractElement[] = [
   },
 ];
 
-@Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
+@Injectable({
+  providedIn: 'root',
 })
-export class TableComponent {
-  public displayedColumns: string[] = [
-    'id',
-    'company_name',
-    'contract_name',
-    'start_date',
-    'cancellation_period',
-    'cost',
-    'currency',
-    'edit',
-    'delete',
-  ];
-  public dataSource: MatTableDataSource<ContractElement>;
+export class ContractService {
+  constructor() {}
 
-  constructor() {
-    this.dataSource = new MatTableDataSource<ContractElement>(CONTRACT_DATA);
-  }
-
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-
-  deleteItem(id: string) {
-    console.log(id);
-  }
-
-  editItem(id: string) {
-    console.log(id);
+  getContracts(): Observable<IContract[]> {
+    return of(CONTRACT_DATA);
   }
 }
