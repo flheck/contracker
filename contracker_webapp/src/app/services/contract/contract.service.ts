@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { IContract } from 'src/app/shared/model/IContract';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { MessageService } from '../message/message.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const CONTRACT_DATA: IContract[] = [
   {
@@ -189,9 +191,18 @@ const CONTRACT_DATA: IContract[] = [
   providedIn: 'root',
 })
 export class ContractService {
-  constructor() {}
+  private contractUrl =
+    'https://xh4tq4wb8j.execute-api.eu-central-1.amazonaws.com/prod/contracts';
+
+  constructor(
+    private http: HttpClient,
+    private messageService: MessageService
+  ) {}
 
   getContracts(): Observable<IContract[]> {
-    return of(CONTRACT_DATA);
+    const contracts = this.http.get<IContract[]>(this.contractUrl);
+    console.log(contracts);
+    this.messageService.sendMessage('Contracts Loaded');
+    return contracts;
   }
 }

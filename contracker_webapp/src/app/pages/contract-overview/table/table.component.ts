@@ -3,6 +3,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
 import { IContract } from 'src/app/shared/model/IContract';
+
+// Services
 import { ContractService } from 'src/app/services/contract/contract.service';
 
 @Component({
