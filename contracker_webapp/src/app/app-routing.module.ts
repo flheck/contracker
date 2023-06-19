@@ -6,6 +6,7 @@ import { ContractOverviewComponent } from './pages/contract-overview/contract-ov
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
+  { path: '', component: MainComponent },
   { path: 'main', component: MainComponent },
   { path: 'contracts', component: ContractOverviewComponent },
   { path: '**', component: NotFoundComponent },
