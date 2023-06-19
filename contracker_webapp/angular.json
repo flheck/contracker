@@ -20,16 +20,12 @@
             "outputPath": "dist/contracker_frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
+              "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -50,6 +46,11 @@
               ],
               "outputHashing": "all"
             },
+            "de": {
+              "localize": ["de"],
+              "outputPath": "dist/contracker_frontend-de/",
+              "i18nMissingTranslation": "error"
+            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,
@@ -67,6 +68,9 @@
             "production": {
               "browserTarget": "contracker_frontend:build:production"
             },
+            "de": {
+              "browserTarget": "contracker_frontend:build:de"
+            },
             "development": {
               "browserTarget": "contracker_frontend:build:development"
             }
@@ -82,20 +86,24 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
+              "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss"
             ],
             "scripts": []
+          }
+        }
+      },
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "de": {
+            "translation": "src/locale/messages.de.xlf",
+            "baseHref": ""
           }
         }
       }

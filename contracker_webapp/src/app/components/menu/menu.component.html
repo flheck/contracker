@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button>
+    <mat-icon (click)="toggleSidebar()">menu</mat-icon>
+  </button>
+
+  <span i18n="Menu App Name | Application Name@@MenuApplicationName"
+    >My Application</span
+  >
+  <span class="fill-remaining-space"></span>
+  <mat-nav-list>
+    <a
+      routerLink="/main"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      i18n="Menu Link | Link to the main-page@@MenuLinkMainPage"
+      >Main</a
+    >
+
+    <a
+      routerLink="/contracts"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      i18n="
+        Menu Link | Link to the contract overview@@MenuLinkContractOverviewPage"
+      >Contracts</a
+    >
+  </mat-nav-list>
+  <button mat-icon-button>
+    <mat-icon>login</mat-icon>
+  </button>
+</mat-toolbar>
