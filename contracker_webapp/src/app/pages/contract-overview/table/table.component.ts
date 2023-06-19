@@ -36,10 +36,6 @@ export class TableComponent {
     this.getContracts();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-
   deleteItem(id: string) {
     console.log(id);
   }
@@ -52,6 +48,8 @@ export class TableComponent {
     this.contractService.getContracts().subscribe((contracts) => {
       this.contracts = contracts;
       this.dataSource = new MatTableDataSource<IContract>(this.contracts);
+      // Paginator has to be initialized after data loaded: https://stackoverflow.com/questions/48785965/angular-matpaginator-doesnt-get-initialized
+      this.dataSource.paginator = this.paginator;
     });
   }
 }
