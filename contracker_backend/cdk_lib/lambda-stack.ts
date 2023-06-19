@@ -48,7 +48,6 @@ export class LambdaStack extends Stack {
     const specApi = new SpecRestApi(this, "swagger-ui-api", {
       apiDefinition: ApiDefinition.fromInline(JSON.parse(api_json)),
     });
-
   }
 
   createContactLambda = (
@@ -83,6 +82,7 @@ export class LambdaStack extends Stack {
           "dynamodb:GetItem",
           "dynamodb:UpdateItem",
           "dynamodb:DeleteItem",
+          "dynamodb:BatchWriteItem",
         ],
       })
     );
