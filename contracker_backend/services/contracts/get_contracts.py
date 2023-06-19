@@ -1,5 +1,11 @@
-import json
-import os
+from . import utils
+
+
+def transformTimestampsToDate(items: list) -> list:
+    for item in items:
+        item["start_date"] = utils.transformUnixTimestampToDate(item["start_date"])
+
+    return items
 
 
 def get_contracts(event, table) -> dict:
@@ -12,33 +18,27 @@ def get_contracts(event, table) -> dict:
             contract_id = queryStringParameters["id"]
             response_get_item = table.get_item(Key={"id": contract_id})
 
-            print(response_get_item)
             if response_get_item["Item"]:
-                return {
-                    "statusCode": 200,
-                    "headers": {"Content-Type": "application/json"},
-                    "body": json.dumps(response_get_item["Item"]),
-                }
+                return utils.create_return_obj(
+                    200, {"Content-Type": "application/json"}, response_get_item["Item"]
+                )
             else:
-                return {
-                    "statusCode": 404,
-                    "headers": {"Content-Type": "application/json"},
-                    "body": json.dumps(
-                        {"message": f"Contract with {contract_id} not found!"}
-                    ),
-                }
-
+                return utils.create_return_obj(
+                    404,
+                    {"Content-Type": "application/json"},
+                    {"message": f"Contract with {contract_id} not found!"},
+                )
         else:
-            return {
-                "statusCode": 400,
-                "headers": {"Content-Type": "application/json"},
-                "body": json.dumps({"message": "Id required!"}),
-            }
+            return utils.create_return_obj(
+                400,
+                {"Content-Type": "application/json"},
+                {"message": "Id required!"},
+            )
 
     result = table.scan()
+    transformedResult = transformTimestampsToDate(result["Items"])
+    print(transformedResult)
 
-    return {
-        "statusCode": 200,
-        "headers": {"Content-Type": "application/json"},
-        "body": json.dumps(result["Items"]),
-    }
+    return utils.create_return_obj(
+        200, {"Content-Type": "application/json"}, transformedResult
+    )

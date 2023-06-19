@@ -7,6 +7,7 @@ from . import get_contracts
 from . import post_contracts
 from . import delete_contracts
 from . import update_contracts
+from . import utils
 
 """
 Links to create this service
@@ -41,4 +42,6 @@ def lambda_handler(event, context):
         print(error)
         return {"statusCode": 500, "body": json.dumps({"message": error})}
 
+    utils.add_cors_header(response)
+    print(response)
     return response
