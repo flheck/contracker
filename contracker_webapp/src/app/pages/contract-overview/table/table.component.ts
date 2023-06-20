@@ -7,6 +7,7 @@ import { IContract, IResponseMessage } from 'src/app/shared/model/IContract';
 // Services
 import { ContractService } from 'src/app/services/contract/contract.service';
 import { MessageService } from 'src/app/services/message/message.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table',
@@ -30,7 +31,8 @@ export class TableComponent {
 
   constructor(
     private contractService: ContractService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   @ViewChild(MatPaginator)
@@ -50,11 +52,12 @@ export class TableComponent {
   }
 
   editItem(id: string) {
-    console.log(id);
+    this.router.navigate(['contracts', 'edit', id]);
   }
 
   getContracts(): void {
     this.contractService.getContracts().subscribe((contracts) => {
+      this.messageService.sendMessage('Contracts Loaded');
       this.contracts = contracts;
       this.dataSource = new MatTableDataSource<IContract>(this.contracts);
       // Paginator has to be initialized after data loaded: https://stackoverflow.com/questions/48785965/angular-matpaginator-doesnt-get-initialized

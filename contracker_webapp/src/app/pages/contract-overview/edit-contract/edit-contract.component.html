@@ -1,0 +1,6 @@
+<ng-container *ngIf="contractData; else progressSpinner">
+  <app-contract-form [contractData]="contractData"></app-contract-form>
+</ng-container>
+<ng-template #progressSpinner
+  ><mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

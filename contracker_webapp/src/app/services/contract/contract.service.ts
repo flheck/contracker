@@ -18,7 +18,12 @@ export class ContractService {
 
   getContracts(): Observable<IContract[]> {
     const contracts = this.http.get<IContract[]>(this.contractUrl);
-    this.messageService.sendMessage('Contracts Loaded');
+    return contracts;
+  }
+
+  getContract(id: string): Observable<IContract> {
+    const options = { params: new HttpParams().set('id', id) };
+    const contracts = this.http.get<IContract>(this.contractUrl, options);
     return contracts;
   }
 
@@ -33,6 +38,12 @@ export class ContractService {
   deleteContract(id: string): Observable<any> {
     const options = { params: new HttpParams().set('id', id) };
     const response = this.http.delete(this.contractUrl, options);
+    return response;
+  }
+
+  putContract(id: string, body: IContract): Observable<any> {
+    const options = { params: new HttpParams().set('id', id) };
+    const response = this.http.put(this.contractUrl, body, options);
     return response;
   }
 }
