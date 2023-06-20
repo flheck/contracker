@@ -6,11 +6,11 @@ import { DataStack } from "../cdk_lib/data-stack";
 import { ApiGatewayStack } from "../cdk_lib/api-gateway-stack";
 
 const app = new App();
-const dataStack = new DataStack(app, "DataStack");
-const lambdaStack = new LambdaStack(app, "LambdaStack", {
+const dataStack = new DataStack(app, "HistoryContractDataStack");
+const lambdaStack = new LambdaStack(app, "HistoryContractLambdaStack", {
   historyContractsTable: dataStack.historyContractsTable,
 });
-new ApiGatewayStack(app, "ApiStack", {
+new ApiGatewayStack(app, "HistoryContractApiStack", {
   historyContractsLambdaIntegration:
     lambdaStack.historyContractsLambdaIntegration,
 });
