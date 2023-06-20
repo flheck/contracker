@@ -1,0 +1,127 @@
+<form (ngSubmit)="onSubmit()" #contractForm="ngForm">
+  <div class="form-group">
+    <label for="company_name">Company Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="company_name"
+      required
+      [(ngModel)]="model.company_name"
+      name="company_name"
+      #company_name="ngModel"
+    />
+    <div
+      [hidden]="company_name.valid || company_name.pristine"
+      class="alert alert-danger"
+    >
+      Company Name is required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="contract_name">Contract Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="contract_name"
+      required
+      [(ngModel)]="model.contract_name"
+      name="contract_name"
+      #contract_name="ngModel"
+    />
+    <div
+      [hidden]="contract_name.valid || contract_name.pristine"
+      class="alert alert-danger"
+    >
+      Contract Name is required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="start_date">Start Date</label>
+    <input
+      type="text"
+      class="form-control"
+      id="start_date"
+      required
+      [(ngModel)]="model.start_date"
+      name="start_date"
+      #start_date="ngModel"
+    />
+    <div
+      [hidden]="start_date.valid || start_date.pristine"
+      class="alert alert-danger"
+    >
+      Start date is required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="cancellation_period">Cancellation Period</label>
+    <input
+      type="text"
+      class="form-control"
+      id="cancellation_period"
+      required
+      [(ngModel)]="model.cancellation_period"
+      name="cancellation_period"
+      #cancellation_period="ngModel"
+    />
+    <div
+      [hidden]="cancellation_period.valid || cancellation_period.pristine"
+      class="alert alert-danger"
+    >
+      Cancellation Period is required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="cost">Cost</label>
+    <input
+      type="text"
+      class="form-control"
+      id="cost"
+      required
+      [(ngModel)]="model.cost"
+      name="cost"
+      #cost="ngModel"
+    />
+    <div [hidden]="cost.valid || cost.pristine" class="alert alert-danger">
+      Cost is required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="currency">Currency</label>
+    <input
+      type="text"
+      class="form-control"
+      id="currency"
+      required
+      [(ngModel)]="model.currency"
+      name="currency"
+      #currency="ngModel"
+    />
+    <div
+      [hidden]="currency.valid || currency.pristine"
+      class="alert alert-danger"
+    >
+      Currency is required
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    class="btn btn-success"
+    [disabled]="!contractForm.form.valid"
+  >
+    Submit
+  </button>
+  <button
+    type="button"
+    class="btn btn-default"
+    (click)="newContract(); contractForm.reset()"
+  >
+    Reset Form
+  </button>
+</form>
