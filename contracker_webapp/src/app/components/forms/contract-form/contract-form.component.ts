@@ -36,17 +36,15 @@ export class ContractFormComponent {
 
   onSubmit() {
     const formData = this.model;
-    if (formData.id) {
-      this.contractService
-        .putContract(formData.id, formData)
-        .subscribe((response) => {
-          // this.messageService.sendMessage(`Created: ${response.ids[0]}`);
-          console.log(response);
-          this.router.navigate(['contracts']);
-        });
+    const id = formData.id;
+    // backend sets the id or used it as primary
+    delete formData.id;
+    if (id) {
+      this.contractService.putContract(id, formData).subscribe((response) => {
+        this.messageService.sendMessage(`Created: ${response}`);
+        this.router.navigate(['contracts']);
+      });
     } else {
-      // backend sets the id
-      delete formData.id;
       const transformedFormData = [formData];
       this.contractService
         .postContract(transformedFormData)
