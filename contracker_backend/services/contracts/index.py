@@ -30,17 +30,17 @@ def lambda_handler(event, context):
             case "GET":
                 response = get_contracts.get_contracts(event, table)
             case "POST":
+                response = post_contracts.post_contracts(event, table)
+            case "PUT":
+                response = update_contracts.update_contracts(event, table)
+            case "DELETE":
                 if (
                     event["queryStringParameters"]
                     and event["queryStringParameters"]["target"] == "history"
                 ):
                     response = post_sqs.post_sqs(event, table)
                 else:
-                    response = post_contracts.post_contracts(event, table)
-            case "PUT":
-                response = update_contracts.update_contracts(event, table)
-            case "DELETE":
-                response = delete_contracts.delete_contracts(event, table)
+                    response = delete_contracts.delete_contracts(event, table)
             case _:
                 print("do nothing")
 

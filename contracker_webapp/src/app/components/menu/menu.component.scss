@@ -7,3 +7,7 @@ a {
   padding: 0 16px;
   text-decoration: none;
 }
+
+[aria-current] {
+  text-decoration: underline;
+}

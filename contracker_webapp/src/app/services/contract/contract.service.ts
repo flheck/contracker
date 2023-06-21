@@ -46,4 +46,12 @@ export class ContractService {
     const response = this.http.put(this.contractUrl, body, options);
     return response;
   }
+
+  cancelContract(id: string): Observable<any> {
+    const options = {
+      params: new HttpParams().set('id', id).set('target', 'history'),
+    };
+    const response = this.http.delete(this.contractUrl, options);
+    return response;
+  }
 }

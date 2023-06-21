@@ -32,6 +32,8 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { CreateContractComponent } from './pages/contract-overview/create-contract/create-contract.component';
 import { EditContractComponent } from './pages/contract-overview/edit-contract/edit-contract.component';
 import { ContractFormComponent } from './components/forms/contract-form/contract-form.component';
+import { HistoryContractOverviewComponent } from './pages/history-contract-overview/history-contract-overview.component';
+import { HistoryTableComponent } from './pages/history-contract-overview/history-table/history-table.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { ContractFormComponent } from './components/forms/contract-form/contract
     CreateContractComponent,
     EditContractComponent,
     ContractFormComponent,
+    HistoryContractOverviewComponent,
+    HistoryTableComponent,
   ],
   imports: [
     BrowserModule,

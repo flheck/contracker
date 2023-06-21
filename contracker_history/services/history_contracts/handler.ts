@@ -25,7 +25,7 @@ async function handler(
   let response: APIGatewayProxyResult = createResponse(502, "Internal Error");
   console.log("Event:", event, context);
 
-  if (event.Records[0].eventSource === "aws:sqs") {
+  if ("Records" in event && event.Records[0].eventSource === "aws:sqs") {
     try {
       response = await postSQSHistoryContract(event.Records[0].body, ddbClient);
       return response;
