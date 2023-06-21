@@ -3,6 +3,7 @@ import {
   APIGatewayProxyEvent,
   APIGatewayProxyResult,
   Context,
+  SQSEvent,
 } from "aws-lambda";
 
 // Custom
@@ -10,6 +11,7 @@ import { getHistoryContract } from "./getHistoryContract";
 import { postHistoryContract } from "./postHistoryContract";
 import { updateHistoryContract } from "./updateHistoryContract";
 import { deleteHistoryContract } from "./deleteHistoryContract";
+import { postSQSHistoryContract } from "./postSQSHistoryContract";
 import { JsonError, MissingFieldError } from "../shared/validator";
 import { addCorsHeader, createResponse } from "../shared/utils";
 
@@ -17,10 +19,20 @@ import { addCorsHeader, createResponse } from "../shared/utils";
 const ddbClient = new DynamoDBClient({});
 
 async function handler(
-  event: APIGatewayProxyEvent,
+  event: any, //APIGatewayProxyEvent | SQSEvent,
   context: Context
 ): Promise<APIGatewayProxyResult> {
   let response: APIGatewayProxyResult = createResponse(502, "Internal Error");
+  console.log("Event:", event, context);
+
+  if (event.Records[0].eventSource === "aws:sqs") {
+    try {
+      response = await postSQSHistoryContract(event.Records[0].body, ddbClient);
+      return response;
+    } catch (error: any) {
+      return createResponse(200, error.message);
+    }
+  }
 
   try {
     switch (event.httpMethod) {

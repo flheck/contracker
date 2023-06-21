@@ -30,6 +30,7 @@ export class LambdaStack extends Stack {
     // Setup Contracts Lambda
     const contractsLambda = this.createContactLambda(this, props);
     this.addPolicyToContractLambda(contractsLambda, props);
+    this.addSQSPolicyToContractLambda(contractsLambda);
     this.contractsLambdaIntegration = new LambdaIntegration(contractsLambda);
 
     // Setup SwaggerUI Lambda
@@ -84,6 +85,19 @@ export class LambdaStack extends Stack {
           "dynamodb:DeleteItem",
           "dynamodb:BatchWriteItem",
         ],
+      })
+    );
+  };
+
+  addSQSPolicyToContractLambda = (lambda: LambdaFunction): void => {
+    // TODO: delete hardcoded arn
+    lambda.addToRolePolicy(
+      new PolicyStatement({
+        effect: Effect.ALLOW,
+        resources: [
+          "arn:aws:sqs:eu-central-1:531201357882:HistoryContractLambdaStack-HistoryContractSqsQueue7121893E-Hx2CzpbHEAVI",
+        ],
+        actions: ["sqs:SendMessage"],
       })
     );
   };

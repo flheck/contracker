@@ -5,6 +5,7 @@ from . import get_contracts
 from . import post_contracts
 from . import delete_contracts
 from . import update_contracts
+from . import post_sqs
 from . import utils
 
 """
@@ -20,6 +21,7 @@ dyn_resource = boto3.resource("dynamodb")
 
 
 def lambda_handler(event, context):
+    print("Event: ", event, context)
     response = None
     table = dyn_resource.Table(utils.get_environments("TABLE_NAME"))
 
@@ -28,7 +30,13 @@ def lambda_handler(event, context):
             case "GET":
                 response = get_contracts.get_contracts(event, table)
             case "POST":
-                response = post_contracts.post_contracts(event, table)
+                if (
+                    event["queryStringParameters"]
+                    and event["queryStringParameters"]["target"] == "history"
+                ):
+                    response = post_sqs.post_sqs(event, table)
+                else:
+                    response = post_contracts.post_contracts(event, table)
             case "PUT":
                 response = update_contracts.update_contracts(event, table)
             case "DELETE":
