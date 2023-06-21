@@ -1,1 +1,50 @@
-<p>main works!</p>
+<div class="container__cards">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Total Cost in Years</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ng-container *ngIf="!isLoading; else progressSpinner">
+        <app-bar-contract-overview
+          [contractData]="contractData"
+        ></app-bar-contract-overview
+      ></ng-container>
+      <ng-template #progressSpinner
+        ><mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Fix Cost Progression</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ng-container *ngIf="!isLoading; else progressSpinner">
+        <app-line-cost-progression
+          [contractData]="contractData"
+        ></app-line-cost-progression
+      ></ng-container>
+      <ng-template #progressSpinner
+        ><mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Amount of Contracts</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ng-container *ngIf="!isLoading; else progressSpinner">
+        <app-doughnut-contract-overview
+          [contractDataLength]="contractData.length"
+          [historyContractDataLength]="historyContractData.length"
+        ></app-doughnut-contract-overview
+      ></ng-container>
+      <ng-template #progressSpinner
+        ><mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+</div>

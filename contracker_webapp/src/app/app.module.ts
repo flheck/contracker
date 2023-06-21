@@ -5,6 +5,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
+// External
+import { NgChartsModule } from 'ng2-charts';
+
 // Routing
 import { AppRoutingModule } from './app-routing.module';
 
@@ -19,6 +22,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatCardModule} from '@angular/material/card'; 
 
 // Components
 import { AppComponent } from './app.component';
@@ -34,6 +38,9 @@ import { EditContractComponent } from './pages/contract-overview/edit-contract/e
 import { ContractFormComponent } from './components/forms/contract-form/contract-form.component';
 import { HistoryContractOverviewComponent } from './pages/history-contract-overview/history-contract-overview.component';
 import { HistoryTableComponent } from './pages/history-contract-overview/history-table/history-table.component';
+import { BarContractOverviewComponent } from './components/charts/bar-contract-overview/bar-contract-overview.component';
+import { DoughnutContractOverviewComponent } from './components/charts/doughnut-contract-overview/doughnut-contract-overview.component';
+import { LineCostProgressionComponent } from './components/charts/line-cost-progression/line-cost-progression.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +57,9 @@ import { HistoryTableComponent } from './pages/history-contract-overview/history
     ContractFormComponent,
     HistoryContractOverviewComponent,
     HistoryTableComponent,
+    BarContractOverviewComponent,
+    DoughnutContractOverviewComponent,
+    LineCostProgressionComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +67,8 @@ import { HistoryTableComponent } from './pages/history-contract-overview/history
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    // External
+    NgChartsModule,
     //Material
     MatToolbarModule,
     MatIconModule,
@@ -68,6 +80,7 @@ import { HistoryTableComponent } from './pages/history-contract-overview/history
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatSnackBarModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent],
