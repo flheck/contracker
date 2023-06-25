@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class HistoryContractService {
   private historyContractUrl =
-    'https://utg2jr3eb2.execute-api.eu-central-1.amazonaws.com/prod/history_contracts';
+    'https://82nri686p4.execute-api.eu-central-1.amazonaws.com/prod/history_contracts';
 
   constructor(private http: HttpClient) {}
 

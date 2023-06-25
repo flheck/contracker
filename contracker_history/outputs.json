@@ -1,0 +1,12 @@
+{
+  "HistoryContractDataStack": {
+    "ExportsOutputRefHistoryContractsTable23337DC1B4F9426F": "HistoryContractsTable-06f48833c4e0",
+    "ExportsOutputFnGetAttHistoryContractsTable23337DC1ArnF45F3F80": "arn:aws:dynamodb:eu-central-1:531201357882:table/HistoryContractsTable-06f48833c4e0"
+  },
+  "HistoryContractLambdaStack": {
+    "ExportsOutputFnGetAtthistoryContractsLambda10E3396BArn2DD60AD0": "arn:aws:lambda:eu-central-1:531201357882:function:HistoryContractLambdaStac-historyContractsLambda10-cnmlFpYOHKKn"
+  },
+  "HistoryContractApiStack": {
+    "HistoryContractsApiEndpoint0AE26709": "https://82nri686p4.execute-api.eu-central-1.amazonaws.com/prod/"
+  }
+}

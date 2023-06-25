@@ -1,0 +1,13 @@
+{
+  "ContractDataStack": {
+    "ExportsOutputRefContractsTable778EA487A860DA49": "ContractsTable-026052f4b0d0",
+    "ExportsOutputFnGetAttContractsTable778EA487Arn35551BCD": "arn:aws:dynamodb:eu-central-1:531201357882:table/ContractsTable-026052f4b0d0"
+  },
+  "ContractLambdaStack": {
+    "swaggeruiapiEndpoint79DE7958": "https://g9p2ehmcsk.execute-api.eu-central-1.amazonaws.com/prod/",
+    "ExportsOutputFnGetAttContractsLambda0B031DB2Arn8E76E753": "arn:aws:lambda:eu-central-1:531201357882:function:ContractLambdaStack-ContractsLambda0B031DB2-ZiljIxJNuimJ"
+  },
+  "ContractApiStack": {
+    "ContractsApiEndpoint6558C8F1": "https://hmrvck74x8.execute-api.eu-central-1.amazonaws.com/prod/"
+  }
+}

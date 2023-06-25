@@ -8,7 +8,9 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "deploy": "cdk deploy --all --profile contracker --outputs-file outputs.json --require-approval never",
+    "destroy": "cdk destroy --all --profile contracker"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.115",

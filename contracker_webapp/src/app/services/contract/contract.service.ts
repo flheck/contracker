@@ -9,7 +9,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class ContractService {
   private contractUrl =
-    'https://xh4tq4wb8j.execute-api.eu-central-1.amazonaws.com/prod/contracts';
+    'https://hmrvck74x8.execute-api.eu-central-1.amazonaws.com/prod/contracts';
 
   constructor(
     private http: HttpClient,

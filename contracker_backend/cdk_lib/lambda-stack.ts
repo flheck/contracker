@@ -95,7 +95,7 @@ export class LambdaStack extends Stack {
       new PolicyStatement({
         effect: Effect.ALLOW,
         resources: [
-          "arn:aws:sqs:eu-central-1:531201357882:HistoryContractLambdaStack-HistoryContractSqsQueue7121893E-Hx2CzpbHEAVI",
+          "arn:aws:sqs:eu-central-1:531201357882:HistoryContractSqsStack-HistoryContractSqsQueue7121893E-FrwmPJuu1WzY",
         ],
         actions: ["sqs:SendMessage"],
       })

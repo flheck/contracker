@@ -32,7 +32,7 @@ def post_sqs(event, table) -> dict:
     if not body == None:
         sqs = boto3.client("sqs")  # client is required to interact with
         sqs.send_message(
-            QueueUrl="https://sqs.eu-central-1.amazonaws.com/531201357882/HistoryContractLambdaStack-HistoryContractSqsQueue7121893E-Hx2CzpbHEAVI",
+            QueueUrl="https://sqs.eu-central-1.amazonaws.com/531201357882/HistoryContractSqsStack-HistoryContractSqsQueue7121893E-FrwmPJuu1WzY",
             MessageBody=json.dumps(body),
         )
     else:
